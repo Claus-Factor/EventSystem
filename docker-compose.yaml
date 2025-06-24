@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  # База данных для сервиса генератора
+  postgres_generator_db:
+    image: postgres:13.3
+    environment:
+      POSTGRES_DB: "generator-service"
+      POSTGRES_USER: "root"
+      POSTGRES_PASSWORD: "root"
+    ports:
+      - "5437:5432"
+
+  # База данных для сервиса процессора
+  postgres_processor_db:
+    image: postgres:13.3
+    environment:
+      POSTGRES_DB: "processor-service"
+      POSTGRES_USER: "root"
+      POSTGRES_PASSWORD: "root"
+    ports:
+      - "5438:5432"

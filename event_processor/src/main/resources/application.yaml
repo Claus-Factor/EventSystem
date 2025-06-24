@@ -11,3 +11,21 @@ server:
   port: 8081
   error:
     include-message: always
+
+processor:
+  composite:
+    timeout: 20000 # 20 секунд
+
+spring:
+  datasource:
+    username: root
+    password: root
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5438/processor-service
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop

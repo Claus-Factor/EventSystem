@@ -11,3 +11,23 @@ server:
   port: 8080
   error:
     include-message: always
+
+generator:
+  processor:
+    url: http://localhost:8081
+  interval:
+    max: 2000 # 2 секунды
+
+spring:
+  datasource:
+    username: root
+    password: root
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5437/generator-service
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
