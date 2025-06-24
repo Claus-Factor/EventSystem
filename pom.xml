@@ -17,8 +17,8 @@
 
     <modules>
         <module>dependencies_bom</module>
-        <module>event_generator</module>
-        <module>event_processor</module>
+        <module>generator</module>
+        <module>processor</module>
     </modules>
 
 </project>
