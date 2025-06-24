@@ -1,6 +1,5 @@
 package ru.nicholas.eventgenerator.service;
 
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,8 +22,11 @@ public class BackgroundEventService {
     private final GeneratorService generatorService;
     private final Random random = new Random();
 
+    @Value("${generator.interval.max}")
+    private int maxInterval;
+
     /**
-     * Автоматически генерирует события каждые 100-2000 мс
+     * Автоматически генерирует события.
      */
     @Scheduled(fixedRate = 100)
     @Async
@@ -32,7 +34,7 @@ public class BackgroundEventService {
         CompletableFuture.runAsync(() -> {
             try {
                 // Случайная задержка от 0 до 2000 мс
-                Thread.sleep(random.nextInt(2000));
+                Thread.sleep(random.nextInt(maxInterval));
 
                 // Генерируем случайный тип события
                 EventType[] eventTypes = EventType.values();

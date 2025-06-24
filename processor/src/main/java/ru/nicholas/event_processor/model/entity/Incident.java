@@ -2,6 +2,8 @@ package ru.nicholas.event_processor.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.proxy.HibernateProxy;
 import ru.nicholas.event_processor.util.IncidentType;
 
@@ -46,6 +48,7 @@ public class Incident {
      * Соответствующие события.
      */
     @OneToMany(mappedBy = "incident", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Fetch(FetchMode.JOIN)
     private List<Event> events;
 
     @Override

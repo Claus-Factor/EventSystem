@@ -9,8 +9,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import ru.nicholas.event_processor.model.entity.Incident;
 import ru.nicholas.event_processor.model.dto.EventRequestDto;
+import ru.nicholas.event_processor.model.dto.IncidentResponseDto;
+import ru.nicholas.event_processor.model.entity.Incident;
 import ru.nicholas.event_processor.service.ProcessorService;
 
 /**
@@ -53,7 +54,7 @@ public class ProcessorController {
             @ApiResponse(responseCode = "400", description = "Некорректные параметры сортировки")
     })
     @ResponseStatus(HttpStatus.CREATED)
-    public Page<Incident> getIncidents(
+    public Page<IncidentResponseDto> getIncidents(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "time") String sortBy,

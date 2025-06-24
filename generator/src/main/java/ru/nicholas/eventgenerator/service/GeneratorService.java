@@ -1,11 +1,10 @@
 package ru.nicholas.eventgenerator.service;
 
+import feign.RetryableException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.RestTemplate;
 import ru.nicholas.eventgenerator.converter.EventConverter;
 import ru.nicholas.eventgenerator.feign.ProcessorClient;
 import ru.nicholas.eventgenerator.model.dto.EventResponseDto;
@@ -44,9 +43,12 @@ public class GeneratorService {
         log.info("Generated event: {}", newEvent);
         eventRepository.save(newEvent);
 
-        processorClient.processEvent(eventConverter.toDto(newEvent));
+        try {
+            processorClient.processEvent(eventConverter.toEventSendDto(newEvent));
+        } catch (RetryableException ignored) {
+        }
 
-        return eventConverter.toDto(newEvent);
+        return eventConverter.toEventResponseDto(newEvent);
 
     }
 

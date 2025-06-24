@@ -7,8 +7,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.nicholas.event_processor.converter.EventConverter;
+import ru.nicholas.event_processor.converter.IncidentConverter;
+import ru.nicholas.event_processor.model.dto.IncidentResponseDto;
 import ru.nicholas.event_processor.model.entity.Event;
-import ru.nicholas.event_processor.model.entity.Incident;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import ru.nicholas.event_processor.model.dto.EventRequestDto;
@@ -23,6 +24,7 @@ public class ProcessorService {
     private final IncidentRepository incidentRepository;
     private final EventRepository eventRepository;
     private final EventConverter eventConverter;
+    private final IncidentConverter incidentConverter;
     private final TemplateService templateService;
 
     /**
@@ -48,9 +50,9 @@ public class ProcessorService {
      * @param direction направление сортировки (ASC/DESC)
      * @return страница с инцидентами
      */
-    public Page<Incident> getIncidents(int page, int size, String sortBy, Sort.Direction direction) {
+    public Page<IncidentResponseDto> getIncidents(int page, int size, String sortBy, Sort.Direction direction) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sortBy));
-        return incidentRepository.findAll(pageable);
+        return incidentConverter.toDtoPage(incidentRepository.findAll(pageable));
     }
 
 }

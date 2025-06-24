@@ -1,16 +1,16 @@
-package ru.nicholas.event_processor.model.dto;
+package ru.nicholas.eventgenerator.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.nicholas.event_processor.util.EventType;
+import ru.nicholas.eventgenerator.util.EventType;
 
 import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EventRequestDto {
+public class EventSendDto {
     private EventType type;
     private LocalDateTime time;
 }
