@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Сервис для обработки событий по шаблонам
+ * Сервис для обработки событий по шаблонам.
  */
 @Slf4j
 @Service
@@ -28,6 +28,7 @@ public class TemplateService {
 
     /**
      * Обрабатывает событие по всем доступным шаблонам
+     * @param event обрабатываемое событие {@link Event}
      */
     @Transactional
     public void processEventByTemplates(Event event) {
@@ -46,7 +47,9 @@ public class TemplateService {
     }
 
     /**
-     * Шаблон №1 (простой): если получено событие с Event.Type = 1 то создать инцидент 1 типа
+     * Шаблон №1 (простой): если получено событие с Event.Type = 1 то создать инцидент 1 типа.
+     * @param event обрабатываемое событие {@link Event}
+     * @return логическое значение
      */
     private boolean processSimpleTemplate(Event event) {
         if (event.getType() == EventType.TYPE1) {
@@ -57,9 +60,11 @@ public class TemplateService {
     }
 
     /**
-     * Шаблон №2 (составной): если получено событие с Event.Type = 2, 
-     * а затем в течении 20 секунд получено событие с Event.Type = 1, 
-     * то создать инцидент с Incident.Type = 2
+     * Шаблон №2 (составной): если получено событие с Event.Type = 2,
+     * а затем в течении 20 секунд получено событие с Event.Type = 1,
+     * то создать инцидент с Incident.Type = 2.
+     * @param currentEvent текущее обрабатываемое событие {@link Event}
+     * @return логическое значение
      */
     private boolean processCompositeTemplate(Event currentEvent) {
         if (currentEvent.getType() == EventType.TYPE1) {
@@ -89,7 +94,9 @@ public class TemplateService {
     }
 
     /**
-     * Создает инцидент указанного типа на основе списка событий
+     * Создает инцидент указанного типа на основе списка событий.
+     * @param type тип создаваемого инцидента {@link IncidentType}
+     * @param events список событий {@link Event}
      */
     private void createIncident(IncidentType type, List<Event> events) {
         Incident incident = Incident.builder()

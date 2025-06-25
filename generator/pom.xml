@@ -11,10 +11,9 @@
     </parent>
 
     <artifactId>generator</artifactId>
-
-    <name>event_generator</name>
-    <description>eventgenerator</description>
     <packaging>jar</packaging>
+
+    <description>Модуль "Генератор"</description>
 
     <build>
         <plugins>

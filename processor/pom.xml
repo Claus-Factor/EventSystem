@@ -11,10 +11,9 @@
     </parent>
 
     <artifactId>processor</artifactId>
-
-    <name>event_processor</name>
-    <description>event_processor</description>
     <packaging>jar</packaging>
+
+    <description>Модуль "Процессор"</description>
 
     <build>
         <plugins>

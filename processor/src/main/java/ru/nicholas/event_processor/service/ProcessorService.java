@@ -16,6 +16,9 @@ import ru.nicholas.event_processor.model.dto.EventRequestDto;
 import ru.nicholas.event_processor.repository.EventRepository;
 import ru.nicholas.event_processor.repository.IncidentRepository;
 
+/**
+ * Сервис .
+ */
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -28,7 +31,8 @@ public class ProcessorService {
     private final TemplateService templateService;
 
     /**
-     * Обрабатывает входящее событие согласно шаблонам
+     * Обрабатывает входящее событие согласно шаблонам.
+     * @param eventDto входящее событие {@link EventRequestDto}
      */
     @Transactional
     public void processEvent(EventRequestDto eventDto) {

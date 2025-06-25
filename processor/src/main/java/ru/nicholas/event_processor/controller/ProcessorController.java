@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.nicholas.event_processor.model.dto.EventRequestDto;
 import ru.nicholas.event_processor.model.dto.IncidentResponseDto;
-import ru.nicholas.event_processor.model.entity.Incident;
 import ru.nicholas.event_processor.service.ProcessorService;
 
 /**
